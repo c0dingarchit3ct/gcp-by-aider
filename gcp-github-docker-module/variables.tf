@@ -17,3 +17,20 @@ variable "environment_tag" {
   description = "Environment tag (e.g., dev, staging, prod)"
   type        = string
 }
+
+variable "github_org" {
+  description = "GitHub organization name"
+  type        = string
+}
+
+variable "workload_identity_pool_id" {
+  description = "ID for the Workload Identity Pool"
+  type        = string
+  default     = "github-pool"
+}
+
+variable "workload_identity_pool_provider_id" {
+  description = "ID for the Workload Identity Pool Provider"
+  type        = string
+  default     = "github-provider"
+}

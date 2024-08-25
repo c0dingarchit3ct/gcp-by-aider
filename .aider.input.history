@@ -10,3 +10,6 @@
 
 # 2024-08-25 12:36:43.422631
 +create a terraform reusable module that will take a github repository name, gcp project name, gcp location, environment tag and create all necessary artifacts to allow the github repo githubactions to push docker images into gcp
+
+# 2024-08-25 13:34:13.307980
++refactor the gcp-github-docker-module to use google workload identity pool instead of service key

@@ -13,8 +13,12 @@ output "service_account_email" {
   value       = google_service_account.github_actions_sa.email
 }
 
-output "service_account_key" {
-  description = "Private key of the created service account for GitHub Actions (sensitive)"
-  value       = google_service_account_key.github_actions_sa_key.private_key
-  sensitive   = true
+output "workload_identity_pool_name" {
+  description = "Name of the Workload Identity Pool"
+  value       = google_iam_workload_identity_pool.github_pool.name
+}
+
+output "workload_identity_pool_provider_name" {
+  description = "Name of the Workload Identity Pool Provider"
+  value       = google_iam_workload_identity_pool_provider.github_provider.name
 }
