@@ -1,0 +1,7 @@
+gcp_project_name = "klfserverless-project"
+gcp_region       = "northamerica-northeast1"
+github_repo_name = "serverless-api"
+environment_tag  = "dev"
+github_org       = "kodekreations-io"
+workload_identity_pool_id = "kodekreations-io-github-pool"
+workload_identity_provider_id = "kodekreations-io-github-provider"

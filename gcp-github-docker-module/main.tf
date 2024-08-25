@@ -7,9 +7,25 @@ terraform {
   }
 }
 
-resource "google_artifact_registry_repository" "docker_repo" {
-  provider = google-beta
+# Enable the Artifact Registry API
+resource "google_project_service" "artifact_registry" {
+  project = var.gcp_project_name
+  service = "artifactregistry.googleapis.com"
 
+  timeouts {
+    create = "30m"
+    update = "40m"
+  }
+
+  # Disable dependent services
+  disable_dependent_services = true
+}
+
+resource "google_artifact_registry_repository" "docker_repo" {
+  depends_on = [google_project_service.artifact_registry]
+  provider   = google-beta
+
+  project       = var.gcp_project_name
   location      = var.gcp_location
   repository_id = "${var.github_repo_name}-docker-repo"
   description   = "Docker repository for ${var.github_repo_name}"
@@ -29,6 +45,7 @@ resource "google_service_account" "github_actions_sa" {
 resource "google_artifact_registry_repository_iam_member" "github_actions_iam" {
   provider = google-beta
 
+  project    = var.gcp_project_name
   location   = google_artifact_registry_repository.docker_repo.location
   repository = google_artifact_registry_repository.docker_repo.name
   role       = "roles/artifactregistry.writer"
@@ -52,15 +69,26 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
   attribute_mapping = {
     "google.subject"       = "assertion.sub"
     "attribute.actor"      = "assertion.actor"
+    "attribute.actor_id"   = "assertion.actor_id"
     "attribute.repository" = "assertion.repository"
   }
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
   }
+  attribute_condition = "attribute.repository == \"${var.github_org}/${var.github_repo_name}\" && attribute.actor_id.startsWith(\"${var.github_org}/\")"
 }
 
-resource "google_service_account_iam_member" "workload_identity_user" {
-  service_account_id = google_service_account.github_actions_sa.name
-  role               = "roles/iam.workloadIdentityUser"
-  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/${var.github_org}/${var.github_repo_name}"
-}
+# resource "google_service_account_iam_member" "workload_identity_user" {
+#   service_account_id = google_service_account.github_actions_sa.name
+#   role               = "roles/iam.workloadIdentityUser"
+#   member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/${var.github_org}/${var.github_repo_name}"
+
+#   condition {
+#     title       = "Limit to specific GitHub repo and org"
+#     description = "Only allow access from the specified GitHub repository and organization"
+#     expression  = <<EOT
+#     "attribute.repository == "${var.github_org}/${var.github_repo_name}" &&
+#     attribute.actor_id.startsWith("${var.github_org}/")"
+# EOT
+#   }
+# }

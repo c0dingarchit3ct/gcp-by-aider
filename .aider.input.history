@@ -13,3 +13,47 @@
 
 # 2024-08-25 13:34:13.307980
 +refactor the gcp-github-docker-module to use google workload identity pool instead of service key
+
+# 2024-08-25 14:46:48.435269
++use workload identity attribute conditions to limit it to a specific repository and organization
+
+# 2024-08-25 14:50:06.901907
++create a main.tf file to create the resources and create a sample tfvars file to be used
+
+# 2024-08-25 14:52:07.198417
++update the code to use the `gcp-github-docker-module/main.tf`
+
+# 2024-08-25 14:53:35.311088
++refactor main.tf to use varaiables.tf and a tfvars input file
+
+# 2024-08-25 14:56:02.908100
++create a tfvars file to pass values for variables.tf and fill in gcp region as montreal
+
+# 2024-08-25 15:07:54.534525
++│ Error: Failed to retrieve project, pid: , err: project: required field is not set
++│
++│   with module.gcp_github_docker.google_artifact_registry_repository.docker_repo,
++│   on gcp-github-docker-module/main.tf line 10, in resource "google_artifact_registry_repository" "docker_repo":
++│   10: resource "google_artifact_registry_repository" "docker_repo" {
++│
++╵
+
+# 2024-08-25 15:14:09.867405
++│ Error: Error applying IAM policy for service account 'projects/klfserverless-project/serviceAccounts/serverless-api-github-actions@klfserverless-project.iam.gserviceaccount.com': Error setting IAM policy for service account 'projects/klfserverless-project/serviceAccounts/serverless-api-github-actions@klfserverless-project.iam.gserviceaccount.com': googleapi: Error 400: Condition expression compilation failed. Debug message: ERROR : ERROR: <expression>:1:5: undeclared reference to 'attribute' (in container '')
++│  |     attribute.repository == "kodekreations-io/serverless-api" &&
++│  | ....^ ERROR : ERROR: <expression>:2:5: undeclared reference to 'attribute' (in container '')
++│  |     attribute.actor_id.startsWith("kodekreations-io/")
++│  | ....^ , badRequest
+
+# 2024-08-25 15:15:34.126614
++ Error: Error creating Repository: googleapi: Error 403: Artifact Registry API has not been used in project klfserverless-project before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/artifactregistry.googleapis.com/overview?project=klfserverless-project then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+
+# 2024-08-25 15:20:54.395999
++ Error: Error applying IAM policy for service account 'projects/klfserverless-project/serviceAccounts/serverless-api-github-actions@klfserverless-project.iam.gserviceaccount.com': Error setting IAM policy for service account 'projects/klfserverless-project/serviceAccounts/serverless-api-github-actions@klfserverless-project.iam.gserviceaccount.com': googleapi: Error 400: Condition expression compilation failed. Debug message: ERROR : ERROR: <expression>:1:5: undeclared reference to 'assertion' (in container '')
++│  |     assertion.repository == "kodekreations-io/serverless-api" &&
++│  | ....^ ERROR : ERROR: <expression>:2:5: undeclared reference to 'assertion' (in container '')
++│  |     assertion.actor_id.startsWith("kodekreations-io/")
++│  | ....^ , badRequest
+
+# 2024-08-25 15:52:51.895914
++add conditional mapping to the workload identity pool provider to restrict for only the repo and org
