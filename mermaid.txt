@@ -1,0 +1,27 @@
+graph TD
+    A[Google Cloud Platform]
+    B[Artifact Registry API]
+    C[Artifact Registry Repository]
+    D[Service Account]
+    E[IAM Member for Repository]
+    F[Workload Identity Pool]
+    G[Workload Identity Pool Provider]
+    H[Service Account IAM Member]
+
+    A -->|contains| B
+    A -->|contains| C
+    A -->|contains| D
+    A -->|contains| E
+    A -->|contains| F
+    A -->|contains| G
+    A -->|contains| H
+
+    B -->|enables| C
+    C -->|uses| D
+    D -->|has| E
+    F -->|has| G
+    G -->|authenticates| D
+    H -->|grants permissions to| D
+
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H default;

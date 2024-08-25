@@ -57,3 +57,15 @@
 
 # 2024-08-25 15:52:51.895914
 +add conditional mapping to the workload identity pool provider to restrict for only the repo and org
+
+# 2024-08-25 16:59:18.325618
++connect the github pool identity provider with the service account that can write to the registry
+
+# 2024-08-25 17:24:22.204241
++undo
+
+# 2024-08-25 17:52:47.909131
++generate a diagram of the terraform artifacts created
+
+# 2024-08-25 17:53:25.864339
++save that diagram in a file called mermaid.txt
