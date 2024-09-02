@@ -22,3 +22,8 @@ output "workload_identity_pool_provider_name" {
   description = "Name of the Workload Identity Pool Provider"
   value       = google_iam_workload_identity_pool_provider.github_provider.name
 }
+
+output "workload_identity_pool_provider_output_id" {
+  description = "Name of the Workload Identity Pool Provider"
+  value       = google_iam_workload_identity_pool_provider.github_provider.id
+}

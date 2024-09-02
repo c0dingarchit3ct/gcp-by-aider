@@ -24,3 +24,8 @@ output "workload_identity_pool_provider_name" {
   description = "Name of the Workload Identity Pool Provider"
   value       = module.gcp_github_docker.workload_identity_pool_provider_name
 }
+
+output "workload_identity_pool_provider_output_id" {
+  description = "Name of the Workload Identity Pool Provider"
+  value       = module.gcp_github_docker.workload_identity_pool_provider_output_id
+}

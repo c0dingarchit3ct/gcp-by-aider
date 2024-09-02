@@ -67,11 +67,12 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
     "attribute.actor"      = "assertion.actor"
     "attribute.actor_id"   = "assertion.actor_id"
     "attribute.repository" = "assertion.repository"
+    "attribute.org"        = "assertion.repository_owner"
   }
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
   }
-  attribute_condition = "attribute.repository == \"${var.github_org}/${var.github_repo_name}\" && attribute.actor_id.startsWith(\"${var.github_org}/\")"
+  attribute_condition = "attribute.repository == \"${var.github_org}/${var.github_repo_name}\" && attribute.org==\"${var.github_org}\""
 }
 
 resource "google_service_account_iam_member" "workload_identity_user" {
