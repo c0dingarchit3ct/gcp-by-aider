@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-    }
-  }
-}
-
-provider "google" {
-  project = var.gcp_project_name
-  region  = var.gcp_region
-}
-
 module "gcp_github_docker" {
   source = "./gcp-github-docker-module"
 
@@ -26,3 +12,47 @@ module "gcp_github_docker" {
 
 
 
+# resource "google_project_service" "iamserveres" {
+#   project = var.gcp_project_name
+#   service = "iam.googleapis.com"
+
+#   timeouts {
+#     create = "30m"
+#     update = "40m"
+#   }
+
+#   disable_on_destroy = false
+# }
+# resource "google_project_service" "credservices" {
+#   project = var.gcp_project_name
+#   service = "iamcredentials.googleapis.com"
+
+#   timeouts {
+#     create = "30m"
+#     update = "40m"
+#   }
+
+#   disable_on_destroy = false
+# }
+# resource "google_project_service" "resourcemanagerservices" {
+#   project = var.gcp_project_name
+#   service = "cloudresourcemanager.googleapis.com"
+
+#   timeouts {
+#     create = "30m"
+#     update = "40m"
+#   }
+
+#   disable_on_destroy = false
+# }
+# resource "google_project_service" "stsservices" {
+#   project = var.gcp_project_name
+#   service = "sts.googleapis.com"
+
+#   timeouts {
+#     create = "30m"
+#     update = "40m"
+#   }
+
+#   disable_on_destroy = false
+# }

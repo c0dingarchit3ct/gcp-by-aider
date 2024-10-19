@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-    }
-  }
-}
 
 # Enable the Artifact Registry API
 resource "google_project_service" "artifact_registry" {
