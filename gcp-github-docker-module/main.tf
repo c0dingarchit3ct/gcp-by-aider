@@ -33,6 +33,18 @@ resource "google_service_account" "github_actions_sa" {
   project      = var.gcp_project_name
 }
 
+resource "google_project_iam_member" "cloud_run_admin" {
+  project = var.gcp_project_name
+  role    = "roles/run.admin"
+  member  = "serviceAccount:${google_service_account.github_actions_sa.email}"
+}
+
+resource "google_project_iam_member" "service_account_user" {
+  project = var.gcp_project_name
+  role    = "roles/iam.serviceAccountUser"
+  member  = "serviceAccount:${google_service_account.github_actions_sa.email}"
+}
+
 resource "google_artifact_registry_repository_iam_member" "github_actions_iam" {
 
   project    = var.gcp_project_name
@@ -81,3 +93,5 @@ resource "google_service_account_iam_member" "workload_identity_user" {
   # EOT
   #   }
 }
+
+

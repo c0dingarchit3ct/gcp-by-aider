@@ -10,7 +10,13 @@ module "gcp_github_docker" {
   workload_identity_pool_provider_id = var.workload_identity_pool_provider_id
 }
 
-
+module "cloud_run_service" {
+  source           = "./cloud-run-module"
+  service_name     = var.service_name
+  gcp_project_name = var.gcp_project_name
+  gcp_location     = var.gcp_region
+  environment_tag  = var.environment_tag
+}
 
 # resource "google_project_service" "iamserveres" {
 #   project = var.gcp_project_name

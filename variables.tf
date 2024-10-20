@@ -34,3 +34,8 @@ variable "workload_identity_pool_provider_id" {
   type        = string
 }
 
+variable "service_name" {
+  description = "Name of the Cloud Run service that will be deployed"
+  type        = string
+
+}

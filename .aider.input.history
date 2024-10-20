@@ -78,3 +78,39 @@
 
 # 2024-10-19 18:19:01.443776
 +n
+
+# 2024-10-19 19:04:46.098702
++in the terraform module update the service account to add ability to deploy code to cloud run
+
+# 2024-10-19 19:05:13.976773
++n
+
+# 2024-10-19 19:14:54.225148
++create a new terraform module called cloud-run-module and in it add a cloudrun service with the name passed as a variable to it and then call it from the original main file
+
+# 2024-10-19 19:15:16.647849
++n
+
+# 2024-10-19 19:15:26.648454
++make sure this service is publicly accessible 
+
+# 2024-10-19 19:15:30.513785
++y
+
+# 2024-10-19 19:15:44.995709
++n
+
+# 2024-10-19 19:16:05.552378
++make sure the cloud run service is publicly accessible
+
+# 2024-10-19 19:16:18.891606
++yes
+
+# 2024-10-19 19:16:37.494189
++D
+
+# 2024-10-19 19:16:55.236976
++make sure the cloud run service is publicly accessible
+
+# 2024-10-19 19:43:30.186343
++ This object has no argument, nested block, or exported attribute named "url".
