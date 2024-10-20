@@ -50,7 +50,7 @@ resource "google_artifact_registry_repository_iam_member" "github_actions_iam" {
   project    = var.gcp_project_name
   location   = google_artifact_registry_repository.docker_repo.location
   repository = google_artifact_registry_repository.docker_repo.name
-  role       = "roles/artifactregistry.writer"
+  role       = "roles/artifactregistry.repoAdmin"
   member     = "serviceAccount:${google_service_account.github_actions_sa.email}"
 }
 
