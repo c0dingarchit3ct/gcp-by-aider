@@ -114,3 +114,39 @@
 
 # 2024-10-19 19:43:30.186343
 + This object has no argument, nested block, or exported attribute named "url".
+
+# 2024-10-26 11:23:18.840607
++/exit
+
+# 2024-10-26 11:24:57.142762
++n
+
+# 2024-10-26 11:25:00.942309
++/models
+
+# 2024-10-26 11:27:57.018494
++restructure the terraform main files to improve readability (for example create a separate provider file for the google provider)
+
+# 2024-10-27 13:54:32.692071
++D
+
+# 2024-10-27 14:21:43.893165
++Error: Duplicate provider configuration
+
+# 2024-10-27 14:23:34.714327
++Error: Unsupported argument
++│
++│   on main.tf line 26, in module "cloud_run_service":
++│   26:   provider   = google.main
+
+# 2024-10-27 14:25:31.541269
++D
+
+# 2024-10-27 14:27:43.542739
++move the backend from versions.tf to the backend.tf
+
+# 2024-10-27 14:28:01.332104
++/run terraform init -reconfigure
+
+# 2024-10-27 14:28:17.637806
++N
